@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Veo Free - Text & Image to Video Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg viewBox="0 0 100 100" width="50" height="50">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#4285F4" stroke-width="2"/>
+                        <path d="M 35 40 L 65 50 L 35 60 Z" fill="#4285F4"/>
+                    </svg>
+                    <h1>Google Veo Free</h1>
+                </div>
+                <p class="subtitle">Transform Text & Images into Professional Videos</p>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="text-to-video">
+                <span class="icon">📝</span> Text to Video
+            </button>
+            <button class="tab-button" data-tab="image-to-video">
+                <span class="icon">🖼️</span> Image to Video
+            </button>
+            <button class="tab-button" data-tab="settings">
+                <span class="icon">⚙️</span> Settings
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Text to Video Tab -->
+            <section id="text-to-video" class="tab-content active">
+                <div class="content-wrapper">
+                    <div class="input-section">
+                        <h2>Text to Video</h2>
+                        <p class="section-description">Describe your video, and let AI create it for you</p>
+                        
+                        <form id="text-form" class="form">
+                            <div class="form-group">
+                                <label for="text-prompt">Video Description</label>
+                                <textarea 
+                                    id="text-prompt" 
+                                    class="textarea" 
+                                    placeholder="e.g., A serene sunset over the ocean with waves crashing on the shore. Golden hour lighting, warm colors, calm atmosphere."
+                                    rows="5"
+                                ></textarea>
+                                <span class="char-count">0 / 500</span>
+                            </div>
+
+                            <div class="settings-grid">
+                                <div class="form-group">
+                                    <label for="text-duration">Duration (seconds)</label>
+                                    <div class="input-with-display">
+                                        <input 
+                                            type="range" 
+                                            id="text-duration" 
+                                            class="slider"
+                                            min="5" 
+                                            max="60" 
+                                            value="10" 
+                                            step="5"
+                                        >
+                                        <span class="duration-display">10s</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="text-quality">Quality</label>
+                                    <select id="text-quality" class="select">
+                                        <option value="sd">SD (480p)</option>
+                                        <option value="hd" selected>HD (720p)</option>
+                                        <option value="4k">4K (2160p)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="text-fps">Frame Rate</label>
+                                    <select id="text-fps" class="select">
+                                        <option value="24">24 fps</option>
+                                        <option value="30" selected>30 fps</option>
+                                        <option value="60">60 fps</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="text-format">Format</label>
+                                    <select id="text-format" class="select">
+                                        <option value="mp4" selected>MP4</option>
+                                        <option value="webm">WebM</option>
+                                        <option value="avi">AVI</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <span class="icon">✨</span> Generate Video
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="preview-section">
+                        <h3>Preview & Results</h3>
+                        <div id="text-preview" class="preview-area">
+                            <div class="placeholder">
+                                <svg viewBox="0 0 200 200" width="100" height="100">
+                                    <rect x="20" y="20" width="160" height="160" fill="none" stroke="#ddd" stroke-width="2" rx="10"/>
+                                    <circle cx="100" cy="100" r="40" fill="none" stroke="#ddd" stroke-width="2"/>
+                                    <path d="M 75 80 L 125 100 L 75 120 Z" fill="#ddd"/>
+                                </svg>
+                                <p>Your generated video will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Image to Video Tab -->
+            <section id="image-to-video" class="tab-content">
+                <div class="content-wrapper">
+                    <div class="input-section">
+                        <h2>Image to Video</h2>
+                        <p class="section-description">Upload an image and describe the motion</p>
+                        
+                        <form id="image-form" class="form">
+                            <div class="form-group">
+                                <label for="image-upload">Upload Image</label>
+                                <div class="file-upload-area" id="upload-area">
+                                    <input 
+                                        type="file" 
+                                        id="image-upload" 
+                                        class="file-input"
+                                        accept="image/*"
+                                    >
+                                    <div class="upload-content">
+                                        <svg viewBox="0 0 100 100" width="50" height="50">
+                                            <rect x="10" y="10" width="80" height="80" fill="none" stroke="#4285F4" stroke-width="2" rx="5"/>
+                                            <circle cx="30" cy="30" r="8" fill="#4285F4"/>
+                                            <path d="M 10 70 L 40 40 L 70 60 L 90 30" fill="none" stroke="#4285F4" stroke-width="2"/>
+                                        </svg>
+                                        <p><strong>Drag and drop your image here</strong></p>
+                                        <p class="small-text">or click to select a file</p>
+                                    </div>
+                                </div>
+                                <div id="image-preview-small" class="image-preview-small" style="display:none;">
+                                    <img id="preview-img" alt="Preview">
+                                    <button type="button" class="btn-remove">✕</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image-motion-prompt">Motion Description</label>
+                                <textarea 
+                                    id="image-motion-prompt" 
+                                    class="textarea" 
+                                    placeholder="e.g., The camera slowly zooms in on the subject with a gentle pan to the left. Add subtle ambient light effects."
+                                    rows="4"
+                                ></textarea>
+                            </div>
+
+                            <div class="settings-grid">
+                                <div class="form-group">
+                                    <label for="image-duration">Duration (seconds)</label>
+                                    <div class="input-with-display">
+                                        <input 
+                                            type="range" 
+                                            id="image-duration" 
+                                            class="slider"
+                                            min="5" 
+                                            max="60" 
+                                            value="10"
+                                            step="5"
+                                        >
+                                        <span class="duration-display">10s</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="image-quality">Quality</label>
+                                    <select id="image-quality" class="select">
+                                        <option value="sd">SD (480p)</option>
+                                        <option value="hd" selected>HD (720p)</option>
+                                        <option value="4k">4K (2160p)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="image-fps">Frame Rate</label>
+                                    <select id="image-fps" class="select">
+                                        <option value="24">24 fps</option>
+                                        <option value="30" selected>30 fps</option>
+                                        <option value="60">60 fps</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="image-format">Format</label>
+                                    <select id="image-format" class="select">
+                                        <option value="mp4" selected>MP4</option>
+                                        <option value="webm">WebM</option>
+                                        <option value="avi">AVI</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <span class="icon">✨</span> Generate Video
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="preview-section">
+                        <h3>Preview & Results</h3>
+                        <div id="image-preview" class="preview-area">
+                            <div class="placeholder">
+                                <svg viewBox="0 0 200 200" width="100" height="100">
+                                    <rect x="20" y="20" width="160" height="160" fill="none" stroke="#ddd" stroke-width="2" rx="10"/>
+                                    <circle cx="100" cy="100" r="40" fill="none" stroke="#ddd" stroke-width="2"/>
+                                    <path d="M 75 80 L 125 100 L 75 120 Z" fill="#ddd"/>
+                                </svg>
+                                <p>Your generated video will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Tab -->
+            <section id="settings" class="tab-content">
+                <div class="settings-container">
+                    <h2>Settings</h2>
+                    
+                    <div class="settings-group">
+                        <h3>API Configuration</h3>
+                        <div class="form-group">
+                            <label for="api-key">Google API Key</label>
+                            <input 
+                                type="password" 
+                                id="api-key" 
+                                class="input"
+                                placeholder="Enter your Google API key"
+                            >
+                            <p class="help-text">Your API key is stored locally and never sent to external servers.</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>Default Settings</h3>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="auto-download" checked>
+                                Auto-download generated videos
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="high-priority" checked>
+                                High priority processing
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="notifications">
+                                Desktop notifications
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>About</h3>
+                        <p><strong>Google Veo Free v1.0.0</strong></p>
+                        <p>Transform your ideas into videos with AI-powered generation.</p>
+                        <p>
+                            <a href="https://github.com/Stubbyfare/Google-Veo-Free" target="_blank">GitHub Repository</a> | 
+                            <a href="#" target="_blank">Documentation</a>
+                        </p>
+                    </div>
+
+                    <button class="btn btn-secondary" id="save-settings">Save Settings</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Progress Modal -->
+        <div id="progress-modal" class="modal">
+            <div class="modal-content">
+                <h3>Generating Video</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <p id="progress-text">Initializing...</p>
+                <button class="btn btn-secondary" id="cancel-btn">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div id="error-modal" class="modal">
+            <div class="modal-content error">
+                <h3>Error</h3>
+                <p id="error-message"></p>
+                <button class="btn btn-primary" id="error-close">Close</button>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="success-modal" class="modal">
+            <div class="modal-content success">
+                <h3>✓ Video Generated Successfully!</h3>
+                <p id="success-message"></p>
+                <div class="modal-buttons">
+                    <button class="btn btn-primary" id="download-btn">Download Video</button>
+                    <button class="btn btn-secondary" id="success-close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
